@@ -12,6 +12,7 @@ namespace StockPortfolio.Data
         public PortfolioContext(DbContextOptions<PortfolioContext> options) : base(options) { }
 
         public DbSet<Stock> Stocks { get; set; }
+        public DbSet<StockTransaction> StockTransactions { get; set; }
         
     }
 }
