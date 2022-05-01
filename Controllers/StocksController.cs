@@ -65,6 +65,7 @@ namespace StockPortfolio.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    stock.Symbol = stock.Symbol.ToUpper();
                     _context.Add(stock);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
@@ -107,10 +108,11 @@ namespace StockPortfolio.Controllers
 
             var stockToUpdate = await _context.Stocks
                 .FirstOrDefaultAsync(s => s.ID == id);
+
             if (await TryUpdateModelAsync<Stock>(stockToUpdate, "", s => s.Symbol, s => s.CompanyName))
             {
                 try
-                {
+                {                   
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }

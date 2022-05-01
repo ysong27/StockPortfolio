@@ -14,13 +14,13 @@ namespace StockPortfolio.Models
     public class StockTransaction
     {
         public int ID { get; set; }
-        public int StockID { get; set; }        // foreign key
+        public int PortfolioStockID { get; set; }        // foreign key
         public DateTime TransactionDateTime { get; set; }
         public TransactionType TransactionType { get; set; }
         public double Price { get; set; }
         public int Quantity { get; set; }
 
 
-        public Stock Stock { get; set; }        // navigation property
+        public PortfolioStock PortfolioStock { get; set; }        // navigation property
     }
 }

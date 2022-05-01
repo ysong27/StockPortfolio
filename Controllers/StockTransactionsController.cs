@@ -23,7 +23,7 @@ namespace StockPortfolio.Controllers
         public async Task<IActionResult> Index()
         {
             var portfolioContext = _context.StockTransactions
-                .Include(s => s.Stock)
+                .Include(s => s.PortfolioStock)
                 .OrderByDescending(s => s.TransactionDateTime);
             return View(await portfolioContext.ToListAsync());
         }
@@ -37,7 +37,7 @@ namespace StockPortfolio.Controllers
             }
 
             var stockTransaction = await _context.StockTransactions
-                .Include(s => s.Stock)
+                .Include(s => s.PortfolioStock)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.ID == id);
 
@@ -76,7 +76,7 @@ namespace StockPortfolio.Controllers
             {
                 ModelState.AddModelError("", "Unable to save changes.");
             }
-            ViewData["StockID"] = new SelectList(_context.Stocks, "ID", "CompanyName", stockTransaction.StockID);
+            ViewData["StockID"] = new SelectList(_context.Stocks, "ID", "CompanyName", stockTransaction.PortfolioStockID);
             return View(stockTransaction);
         }
 
@@ -94,7 +94,7 @@ namespace StockPortfolio.Controllers
             {
                 return NotFound();
             }
-            ViewData["StockID"] = new SelectList(_context.Stocks, "ID", "CompanyName", stockTransaction.StockID);
+            ViewData["StockID"] = new SelectList(_context.Stocks, "ID", "CompanyName", stockTransaction.PortfolioStockID);
             return View(stockTransaction);
         }
 
@@ -113,7 +113,7 @@ namespace StockPortfolio.Controllers
             var stockTransactionToUpdate = await _context.StockTransactions
                 .FirstOrDefaultAsync(s => s.ID == id);
             if (await TryUpdateModelAsync<StockTransaction>(
-                stockTransactionToUpdate, "", s => s.StockID, s => s.TransactionDateTime, s => s.TransactionType, s => s.Price, s => s.Quantity))
+                stockTransactionToUpdate, "", s => s.PortfolioStockID, s => s.TransactionDateTime, s => s.TransactionType, s => s.Price, s => s.Quantity))
             {
                 try
                 {
@@ -138,7 +138,7 @@ namespace StockPortfolio.Controllers
             }
             var stockTransaction = await _context.StockTransactions
                 .AsNoTracking()
-                .Include(s => s.Stock)
+                .Include(s => s.PortfolioStock)
                 .FirstOrDefaultAsync(s => s.ID == id);
             if (stockTransaction == null)
             {
