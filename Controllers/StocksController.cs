@@ -23,6 +23,8 @@ namespace StockPortfolio.Controllers
         public async Task<IActionResult> Index()
         {
             var stocks = await _context.Stocks.OrderBy(m => m.Symbol).ToListAsync();
+            var symbolsStr = string.Join(",", stocks.Select(s => s.Symbol.ToString()));
+            ViewBag.quoteList = await YHFinanceAPIClient.ProcessQuotes(symbolsStr);
             return View(stocks);
         }
 
