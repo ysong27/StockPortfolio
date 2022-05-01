@@ -10,11 +10,11 @@ using StockPortfolio.Models;
 
 namespace StockPortfolio.Controllers
 {
-    public class StockTransactionsController : Controller
+    public class PortfolioStockTransactionsController : Controller
     {
         private readonly PortfolioContext _context;
 
-        public StockTransactionsController(PortfolioContext context)
+        public PortfolioStockTransactionsController(PortfolioContext context)
         {
             _context = context;
         }
@@ -61,7 +61,7 @@ namespace StockPortfolio.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StockID,TransactionDateTime,TransactionType,Price,Quantity")] StockTransaction stockTransaction)
+        public async Task<IActionResult> Create([Bind("StockID,TransactionDateTime,TransactionType,Price,Quantity")] PortfolioStockTransaction stockTransaction)
         {
             try
             {
@@ -112,7 +112,7 @@ namespace StockPortfolio.Controllers
             }
             var stockTransactionToUpdate = await _context.StockTransactions
                 .FirstOrDefaultAsync(s => s.ID == id);
-            if (await TryUpdateModelAsync<StockTransaction>(
+            if (await TryUpdateModelAsync<PortfolioStockTransaction>(
                 stockTransactionToUpdate, "", s => s.PortfolioStockID, s => s.TransactionDateTime, s => s.TransactionType, s => s.Price, s => s.Quantity))
             {
                 try

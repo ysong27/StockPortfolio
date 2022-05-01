@@ -11,7 +11,7 @@ namespace StockPortfolio.Models
         Sell
     }
 
-    public class StockTransaction
+    public class PortfolioStockTransaction
     {
         public int ID { get; set; }
         public int PortfolioStockID { get; set; }        // foreign key

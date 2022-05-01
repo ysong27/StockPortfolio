@@ -13,7 +13,7 @@ namespace StockPortfolio.Data
 
         public DbSet<Stock> Stocks { get; set; }
         public DbSet<PortfolioStock> PortfolioStocks { get; set; }
-        public DbSet<StockTransaction> StockTransactions { get; set; }
+        public DbSet<PortfolioStockTransaction> StockTransactions { get; set; }
         
     }
 }
