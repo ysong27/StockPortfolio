@@ -121,9 +121,6 @@ namespace StockPortfolio.Controllers
             return View(stockToUpdate);
         }
 
-
-
-
         // GET: Stocks/Delete/5
         public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         { 
