@@ -20,7 +20,11 @@ namespace StockPortfolio.Models
 
         public int Volume { get; set; }
 
+        public double StockValue { get; set; }
+
         [Display(Name = "Initial Purchase Datetime")]
         public DateTime InitialPurchaseDateTime { get; set; }
+
+
     }
 }

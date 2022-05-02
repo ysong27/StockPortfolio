@@ -28,6 +28,8 @@ namespace StockPortfolio.Models
 
         public int Quantity { get; set; }
 
+        public double TransactionValue { get; set; }
+
 
         public PortfolioStock PortfolioStock { get; set; }        // navigation property
     }
