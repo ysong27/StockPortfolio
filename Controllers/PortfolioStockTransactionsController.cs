@@ -130,7 +130,7 @@ namespace StockPortfolio.Controllers
             {
                 return NotFound();
             }
-            ViewData["StockID"] = new SelectList(_context.Stocks, "ID", "CompanyName", stockTransaction.PortfolioStockID);
+            ViewData["StockID"] = new SelectList(_context.PortfolioStocks, "ID", "CompanyName", stockTransaction.PortfolioStockID);
             return View(stockTransaction);
         }
 

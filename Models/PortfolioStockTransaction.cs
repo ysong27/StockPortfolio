@@ -18,16 +18,17 @@ namespace StockPortfolio.Models
 
         public int PortfolioStockID { get; set; }        // foreign key
 
-        [Display(Name = "Transaction Datetime")]
+        [Display(Name = "Transaction")]
         public DateTime TransactionDateTime { get; set; }
 
-        [Display(Name = "Transaction Type")]
+        [Display(Name = "Type")]
         public TransactionType TransactionType { get; set; }
 
         public double Price { get; set; }
 
         public int Quantity { get; set; }
 
+        [Display(Name = "Value")]
         public double TransactionValue { get; set; }
 
 

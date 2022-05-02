@@ -26,7 +26,7 @@ namespace StockPortfolio.Models
 
         public string Symbol { get; set; }
 
-        [Display(Name = "Company Name")]
+        [Display(Name = "Name")]
         public string CompanyName { get; set; }
 
         public Currency Currency { get; set; }
@@ -34,14 +34,15 @@ namespace StockPortfolio.Models
         [Display(Name = "Initial Price")]
         public double InitialPrice { get; set; }
 
-        [Display(Name = "Average Purchase Price")]
+        [Display(Name = "Average Price")]
         public double AveragePrice { get; set; }
 
         public int Volume { get; set; }
 
+        [Display(Name = "Value")]
         public double StockValue { get; set; }
 
-        [Display(Name = "Initial Purchase Datetime")]
+        [Display(Name = "Initial Purchase")]
         public DateTime InitialPurchaseDateTime { get; set; }
 
 
