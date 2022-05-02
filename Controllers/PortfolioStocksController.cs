@@ -22,7 +22,7 @@ namespace StockPortfolio.Controllers
         // GET: PortfolioStocks
         public async Task<IActionResult> Index()
         {
-            return View(await _context.PortfolioStocks.ToListAsync());
+            return View(await _context.PortfolioStocks.OrderBy(p => p.Symbol).ToListAsync());
         }
 
         // GET: PortfolioStocks/Details/5

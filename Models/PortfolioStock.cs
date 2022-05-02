@@ -15,10 +15,12 @@ namespace StockPortfolio.Models
         [Display(Name = "Company Name")]
         public string CompanyName { get; set; }
 
+        [Display(Name = "Average Price")]
         public double AveragePrice { get; set; }
 
         public int Volume { get; set; }
 
+        [Display(Name = "Initial Purchase Datetime")]
         public DateTime InitialPurchaseDateTime { get; set; }
     }
 }
