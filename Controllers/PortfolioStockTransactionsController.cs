@@ -67,7 +67,38 @@ namespace StockPortfolio.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    // Add stock transaction
                     _context.Add(stockTransaction);
+
+                    // Edit portfolio stock
+                    var portfolioStock = await _context.PortfolioStocks.FindAsync(stockTransaction.PortfolioStockID);
+ 
+
+                    if (stockTransaction.TransactionType == TransactionType.Buy)
+                    {
+                        var portfolioStockAmount = portfolioStock.AveragePrice * portfolioStock.Volume;
+                        var stockTransactionAmount = stockTransaction.Price * stockTransaction.Quantity;
+                        portfolioStock.AveragePrice = (portfolioStockAmount + stockTransactionAmount) / (portfolioStock.Volume + stockTransaction.Quantity);
+                        portfolioStock.Volume += stockTransaction.Quantity;
+                    } 
+                    else
+                    {
+                        if (portfolioStock.Volume >= stockTransaction.Quantity)
+                        {
+                            portfolioStock.Volume -= stockTransaction.Quantity;
+                        } 
+                        else if (portfolioStock.Volume == stockTransaction.Quantity)
+                        {
+                            portfolioStock.AveragePrice = 0;
+                            portfolioStock.Volume = 0;
+                        } 
+                        else
+                        {
+                            ModelState.AddModelError("", "Transaction volume cannot be more than portfolio stock volume");
+                            return View(stockTransaction);
+                        }
+                    }
+
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
