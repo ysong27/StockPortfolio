@@ -22,7 +22,7 @@ namespace StockPortfolio.Controllers
         // GET: StockTransactions
         public async Task<IActionResult> Index()
         {
-            var portfolioContext = _context.StockTransactions
+            var portfolioContext = _context.PortfolioStockTransactions
                 .Include(s => s.PortfolioStock)
                 .OrderByDescending(s => s.TransactionDateTime);
             return View(await portfolioContext.ToListAsync());
@@ -36,7 +36,7 @@ namespace StockPortfolio.Controllers
                 return NotFound();
             }
 
-            var stockTransaction = await _context.StockTransactions
+            var stockTransaction = await _context.PortfolioStockTransactions
                 .Include(s => s.PortfolioStock)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.ID == id);
@@ -61,7 +61,7 @@ namespace StockPortfolio.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StockID,TransactionDateTime,TransactionType,Price,Quantity")] PortfolioStockTransaction stockTransaction)
+        public async Task<IActionResult> Create([Bind("PortfolioStockID,TransactionDateTime,TransactionType,Price,Quantity")] PortfolioStockTransaction stockTransaction)
         {
             try
             {
@@ -89,7 +89,7 @@ namespace StockPortfolio.Controllers
                 return NotFound();
             }
 
-            var stockTransaction = await _context.StockTransactions.FindAsync(id);
+            var stockTransaction = await _context.PortfolioStockTransactions.FindAsync(id);
             if (stockTransaction == null)
             {
                 return NotFound();
@@ -110,7 +110,7 @@ namespace StockPortfolio.Controllers
             {
                 return NotFound();
             }
-            var stockTransactionToUpdate = await _context.StockTransactions
+            var stockTransactionToUpdate = await _context.PortfolioStockTransactions
                 .FirstOrDefaultAsync(s => s.ID == id);
             if (await TryUpdateModelAsync<PortfolioStockTransaction>(
                 stockTransactionToUpdate, "", s => s.PortfolioStockID, s => s.TransactionDateTime, s => s.TransactionType, s => s.Price, s => s.Quantity))
@@ -136,7 +136,7 @@ namespace StockPortfolio.Controllers
             {
                 return NotFound();
             }
-            var stockTransaction = await _context.StockTransactions
+            var stockTransaction = await _context.PortfolioStockTransactions
                 .AsNoTracking()
                 .Include(s => s.PortfolioStock)
                 .FirstOrDefaultAsync(s => s.ID == id);
@@ -158,14 +158,14 @@ namespace StockPortfolio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var stockTransaction = await _context.StockTransactions.FindAsync(id);
+            var stockTransaction = await _context.PortfolioStockTransactions.FindAsync(id);
             if (stockTransaction == null)
             {
                 return RedirectToAction(nameof(Index));
             }
             try
             {
-                _context.StockTransactions.Remove(stockTransaction);
+                _context.PortfolioStockTransactions.Remove(stockTransaction);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -179,7 +179,7 @@ namespace StockPortfolio.Controllers
 
         private bool StockTransactionExists(int id)
         {
-            return _context.StockTransactions.Any(e => e.ID == id);
+            return _context.PortfolioStockTransactions.Any(e => e.ID == id);
         }
     }
 }
