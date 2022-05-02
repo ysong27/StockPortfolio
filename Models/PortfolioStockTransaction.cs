@@ -31,6 +31,15 @@ namespace StockPortfolio.Models
         public double TransactionValue { get; set; }
 
 
-        public PortfolioStock PortfolioStock { get; set; }        // navigation property
+        // Navigation Property
+        public PortfolioStock PortfolioStock { get; set; }        
+
+
+
+        public PortfolioStockTransaction()
+        {
+            TransactionDateTime = DateTime.Now;
+        }
+
     }
 }

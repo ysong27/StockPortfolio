@@ -54,7 +54,7 @@ namespace StockPortfolio.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Symbol,CompanyName,AveragePrice,Volume,InitialPurchaseDateTime")] PortfolioStock portfolioStock)
+        public async Task<IActionResult> Create([Bind("Symbol,CompanyName")] PortfolioStock portfolioStock)
         {
             try
             {
@@ -102,7 +102,7 @@ namespace StockPortfolio.Controllers
             }
             var portfolioStockToUpdate = await _context.PortfolioStocks
                 .FirstOrDefaultAsync(p => p.ID == id);
-            if (await TryUpdateModelAsync<PortfolioStock>(portfolioStockToUpdate, "", p => p.Symbol, p => p.CompanyName, p => p.AveragePrice, p => p.Volume, p => p.InitialPurchaseDateTime))
+            if (await TryUpdateModelAsync<PortfolioStock>(portfolioStockToUpdate, "", p => p.Symbol, p => p.CompanyName))
             {
                 try
                 {

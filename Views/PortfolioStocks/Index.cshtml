@@ -25,6 +25,9 @@
                 @Html.DisplayNameFor(model => model.Volume)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.StockValue)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.InitialPurchaseDateTime)
             </th>
             <th></th>
@@ -44,6 +47,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Volume)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockValue)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.InitialPurchaseDateTime)

@@ -15,7 +15,7 @@ namespace StockPortfolio.Models
         [Display(Name = "Company Name")]
         public string CompanyName { get; set; }
 
-        [Display(Name = "Average Price")]
+        [Display(Name = "Average Purchase Price")]
         public double AveragePrice { get; set; }
 
         public int Volume { get; set; }
@@ -25,6 +25,14 @@ namespace StockPortfolio.Models
         [Display(Name = "Initial Purchase Datetime")]
         public DateTime InitialPurchaseDateTime { get; set; }
 
+
+        public PortfolioStock()
+        {
+            AveragePrice = 0;
+            Volume = 0;
+            StockValue = 0;
+            InitialPurchaseDateTime = DateTime.Now;
+        }
 
     }
 }

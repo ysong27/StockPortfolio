@@ -61,36 +61,36 @@ namespace StockPortfolio.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PortfolioStockID,TransactionDateTime,TransactionType,Price,Quantity")] PortfolioStockTransaction stockTransaction)
+        public async Task<IActionResult> Create([Bind("PortfolioStockID,TransactionType,Price,Quantity")] PortfolioStockTransaction stockTransaction)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
                     // Add stock transaction
+                    stockTransaction.TransactionValue = stockTransaction.Price * stockTransaction.Quantity;
                     _context.Add(stockTransaction);
 
                     // Edit portfolio stock
                     var portfolioStock = await _context.PortfolioStocks.FindAsync(stockTransaction.PortfolioStockID);
- 
-
                     if (stockTransaction.TransactionType == TransactionType.Buy)
                     {
-                        var portfolioStockAmount = portfolioStock.AveragePrice * portfolioStock.Volume;
-                        var stockTransactionAmount = stockTransaction.Price * stockTransaction.Quantity;
-                        portfolioStock.AveragePrice = (portfolioStockAmount + stockTransactionAmount) / (portfolioStock.Volume + stockTransaction.Quantity);
+                        portfolioStock.AveragePrice = (portfolioStock.StockValue + stockTransaction.TransactionValue) / (portfolioStock.Volume + stockTransaction.Quantity);
                         portfolioStock.Volume += stockTransaction.Quantity;
-                    } 
+                        portfolioStock.StockValue = portfolioStock.AveragePrice * portfolioStock.Volume;
+                    }
                     else
                     {
                         if (portfolioStock.Volume >= stockTransaction.Quantity)
                         {
                             portfolioStock.Volume -= stockTransaction.Quantity;
+                            portfolioStock.StockValue -= stockTransaction.TransactionValue;
                         } 
                         else if (portfolioStock.Volume == stockTransaction.Quantity)
                         {
                             portfolioStock.AveragePrice = 0;
                             portfolioStock.Volume = 0;
+                            portfolioStock.StockValue = 0;
                         } 
                         else
                         {
@@ -144,7 +144,7 @@ namespace StockPortfolio.Controllers
             var stockTransactionToUpdate = await _context.PortfolioStockTransactions
                 .FirstOrDefaultAsync(s => s.ID == id);
             if (await TryUpdateModelAsync<PortfolioStockTransaction>(
-                stockTransactionToUpdate, "", s => s.PortfolioStockID, s => s.TransactionDateTime, s => s.TransactionType, s => s.Price, s => s.Quantity))
+                stockTransactionToUpdate, "", s => s.PortfolioStockID, s => s.TransactionType, s => s.Price, s => s.Quantity))
             {
                 try
                 {
