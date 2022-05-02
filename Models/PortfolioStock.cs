@@ -25,12 +25,16 @@ namespace StockPortfolio.Models
         [Display(Name = "Initial Purchase Datetime")]
         public DateTime InitialPurchaseDateTime { get; set; }
 
+        [Display(Name = "Initial Price")]
+        public double InitialPrice { get; set; }
+
 
         public PortfolioStock()
         {
             AveragePrice = 0;
             Volume = 0;
             StockValue = 0;
+            InitialPrice = 0;
             InitialPurchaseDateTime = DateTime.Now;
         }
 

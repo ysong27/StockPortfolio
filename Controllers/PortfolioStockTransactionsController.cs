@@ -75,6 +75,11 @@ namespace StockPortfolio.Controllers
                     var portfolioStock = await _context.PortfolioStocks.FindAsync(stockTransaction.PortfolioStockID);
                     if (stockTransaction.TransactionType == TransactionType.Buy)
                     {
+                        // Set initial purchase price for portfolio stock
+                        if (portfolioStock.InitialPrice == 0)
+                        {
+                            portfolioStock.InitialPrice = stockTransaction.Price;
+                        }
                         portfolioStock.AveragePrice = (portfolioStock.StockValue + stockTransaction.TransactionValue) / (portfolioStock.Volume + stockTransaction.Quantity);
                         portfolioStock.Volume += stockTransaction.Quantity;
                         portfolioStock.StockValue = portfolioStock.AveragePrice * portfolioStock.Volume;
