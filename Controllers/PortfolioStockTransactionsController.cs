@@ -52,7 +52,7 @@ namespace StockPortfolio.Controllers
         // GET: StockTransactions/Create
         public IActionResult Create()
         {
-            ViewData["StockID"] = new SelectList(_context.PortfolioStocks, "ID", "CompanyName");
+            ViewData["StockID"] = new SelectList(_context.PortfolioStocks, "ID", "Symbol");
             return View();
         }
 
@@ -112,7 +112,7 @@ namespace StockPortfolio.Controllers
             {
                 ModelState.AddModelError("", "Unable to save changes.");
             }
-            ViewData["StockID"] = new SelectList(_context.PortfolioStocks, "ID", "CompanyName", stockTransaction.PortfolioStockID);
+            ViewData["StockID"] = new SelectList(_context.PortfolioStocks, "ID", "Symbol", stockTransaction.PortfolioStockID);
             return View(stockTransaction);
         }
 
@@ -130,7 +130,7 @@ namespace StockPortfolio.Controllers
             {
                 return NotFound();
             }
-            ViewData["StockID"] = new SelectList(_context.PortfolioStocks, "ID", "CompanyName", stockTransaction.PortfolioStockID);
+            ViewData["StockID"] = new SelectList(_context.PortfolioStocks, "ID", "Symbol", stockTransaction.PortfolioStockID);
             return View(stockTransaction);
         }
 
@@ -149,7 +149,7 @@ namespace StockPortfolio.Controllers
             var stockTransactionToUpdate = await _context.PortfolioStockTransactions
                 .FirstOrDefaultAsync(s => s.ID == id);
             if (await TryUpdateModelAsync<PortfolioStockTransaction>(
-                stockTransactionToUpdate, "", s => s.PortfolioStockID, s => s.TransactionType, s => s.Price, s => s.Quantity))
+                stockTransactionToUpdate, "", s => s.TransactionType, s => s.Price, s => s.Quantity))
             {
                 try
                 {

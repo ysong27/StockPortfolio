@@ -18,18 +18,19 @@ namespace StockPortfolio.Models
 
         public int PortfolioStockID { get; set; }        // foreign key
 
-        [Display(Name = "Transaction")]
-        public DateTime TransactionDateTime { get; set; }
-
-        [Display(Name = "Type")]
-        public TransactionType TransactionType { get; set; }
-
         public double Price { get; set; }
 
         public int Quantity { get; set; }
 
         [Display(Name = "Value")]
         public double TransactionValue { get; set; }
+
+        [Display(Name = "Type")]
+        public TransactionType TransactionType { get; set; }
+
+        [Display(Name = "Transaction Time")]
+        public DateTime TransactionDateTime { get; set; }
+
 
 
         // Navigation Property

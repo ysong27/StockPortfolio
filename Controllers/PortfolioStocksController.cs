@@ -102,7 +102,7 @@ namespace StockPortfolio.Controllers
             }
             var portfolioStockToUpdate = await _context.PortfolioStocks
                 .FirstOrDefaultAsync(p => p.ID == id);
-            if (await TryUpdateModelAsync<PortfolioStock>(portfolioStockToUpdate, "", p => p.Symbol, p => p.CompanyName))
+            if (await TryUpdateModelAsync<PortfolioStock>(portfolioStockToUpdate, "", p => p.Symbol, p => p.CompanyName, p => p.Currency))
             {
                 try
                 {

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Portfolio</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -22,6 +22,9 @@
                 @Html.DisplayNameFor(model => model.Currency)
             </th>
             <th>
+                Market Price
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.InitialPrice)
             </th>
             <th>
@@ -34,7 +37,7 @@
                 @Html.DisplayNameFor(model => model.StockValue)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.InitialPurchaseDateTime)
+                Gain (%)
             </th>
             <th></th>
         </tr>
@@ -52,6 +55,9 @@
                 @Html.DisplayFor(modelItem => item.Currency)
             </td>
             <td>
+                price
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.InitialPrice)
             </td>
             <td>
@@ -64,7 +70,7 @@
                 @Html.DisplayFor(modelItem => item.StockValue)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.InitialPurchaseDateTime)
+                percentage
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |

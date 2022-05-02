@@ -18,8 +18,6 @@ namespace StockPortfolio.Models
     }
 
 
-
-
     public class PortfolioStock
     {
         public int ID { get; set; }
@@ -42,7 +40,7 @@ namespace StockPortfolio.Models
         [Display(Name = "Value")]
         public double StockValue { get; set; }
 
-        [Display(Name = "Initial Purchase")]
+        [Display(Name = "Initial Purchase Time")]
         public DateTime InitialPurchaseDateTime { get; set; }
 
 
