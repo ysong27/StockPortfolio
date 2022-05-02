@@ -6,6 +6,20 @@ using System.ComponentModel.DataAnnotations;
 
 namespace StockPortfolio.Models
 {
+
+    public enum Currency
+    {
+        USD,
+        CAD,
+        EUR,
+        CHF,
+        JPY,
+        GBP
+    }
+
+
+
+
     public class PortfolioStock
     {
         public int ID { get; set; }
@@ -14,6 +28,11 @@ namespace StockPortfolio.Models
 
         [Display(Name = "Company Name")]
         public string CompanyName { get; set; }
+
+        public Currency Currency { get; set; }
+
+        [Display(Name = "Initial Price")]
+        public double InitialPrice { get; set; }
 
         [Display(Name = "Average Purchase Price")]
         public double AveragePrice { get; set; }
@@ -25,8 +44,6 @@ namespace StockPortfolio.Models
         [Display(Name = "Initial Purchase Datetime")]
         public DateTime InitialPurchaseDateTime { get; set; }
 
-        [Display(Name = "Initial Price")]
-        public double InitialPrice { get; set; }
 
 
         public PortfolioStock()

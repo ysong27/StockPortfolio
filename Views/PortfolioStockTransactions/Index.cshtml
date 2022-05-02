@@ -22,6 +22,9 @@
                 @Html.DisplayNameFor(model => model.TransactionType)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.PortfolioStock.Currency)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
             <th>
@@ -47,6 +50,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TransactionType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PortfolioStock.Currency)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)

@@ -16,11 +16,6 @@
                 <label asp-for="PortfolioStockID" class="control-label"></label>
                 <select asp-for="PortfolioStockID" class ="form-control" asp-items="ViewBag.StockID"></select>
             </div>
-            @*<div class="form-group">
-                <label asp-for="TransactionDateTime" class="control-label"></label>
-                <input asp-for="TransactionDateTime" class="form-control" />
-                <span asp-validation-for="TransactionDateTime" class="text-danger"></span>
-            </div>*@
             <div class="form-group">
                 <label asp-for="TransactionType" class="control-label"></label>
                 <select asp-for="TransactionType" class="form-control" asp-items="@Html.GetEnumSelectList<TransactionType>()"></select>
