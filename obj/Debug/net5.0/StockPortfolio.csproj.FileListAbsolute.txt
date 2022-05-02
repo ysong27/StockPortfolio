@@ -155,3 +155,8 @@ C:\Users\yoons\Desktop\Projects\StockPortfolio\obj\Debug\net5.0\Razor\Views\Port
 C:\Users\yoons\Desktop\Projects\StockPortfolio\obj\Debug\net5.0\Razor\Views\PortfolioStockTransactions\Details.cshtml.g.cs
 C:\Users\yoons\Desktop\Projects\StockPortfolio\obj\Debug\net5.0\Razor\Views\PortfolioStockTransactions\Edit.cshtml.g.cs
 C:\Users\yoons\Desktop\Projects\StockPortfolio\obj\Debug\net5.0\Razor\Views\PortfolioStockTransactions\Index.cshtml.g.cs
+C:\Users\yoons\Desktop\Projects\StockPortfolio\obj\Debug\net5.0\Razor\Views\PortfolioStocks\Create.cshtml.g.cs
+C:\Users\yoons\Desktop\Projects\StockPortfolio\obj\Debug\net5.0\Razor\Views\PortfolioStocks\Delete.cshtml.g.cs
+C:\Users\yoons\Desktop\Projects\StockPortfolio\obj\Debug\net5.0\Razor\Views\PortfolioStocks\Details.cshtml.g.cs
+C:\Users\yoons\Desktop\Projects\StockPortfolio\obj\Debug\net5.0\Razor\Views\PortfolioStocks\Edit.cshtml.g.cs
+C:\Users\yoons\Desktop\Projects\StockPortfolio\obj\Debug\net5.0\Razor\Views\PortfolioStocks\Index.cshtml.g.cs

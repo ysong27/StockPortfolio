@@ -10,64 +10,57 @@ using StockPortfolio.Models;
 
 namespace StockPortfolio.Controllers
 {
-    public class PortfolioStockTransactionsController : Controller
+    public class PortfolioStocksController : Controller
     {
         private readonly PortfolioContext _context;
 
-        public PortfolioStockTransactionsController(PortfolioContext context)
+        public PortfolioStocksController(PortfolioContext context)
         {
             _context = context;
         }
 
-        // GET: StockTransactions
+        // GET: PortfolioStocks
         public async Task<IActionResult> Index()
         {
-            var portfolioContext = _context.StockTransactions
-                .Include(s => s.PortfolioStock)
-                .OrderByDescending(s => s.TransactionDateTime);
-            return View(await portfolioContext.ToListAsync());
+            return View(await _context.PortfolioStocks.ToListAsync());
         }
 
-        // GET: StockTransactions/Details/5
+        // GET: PortfolioStocks/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var stockTransaction = await _context.StockTransactions
-                .Include(s => s.PortfolioStock)
+            var portfolioStock = await _context.PortfolioStocks
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.ID == id);
-
-            if (stockTransaction == null)
+            if (portfolioStock == null)
             {
                 return NotFound();
             }
-            return View(stockTransaction);
+
+            return View(portfolioStock);
         }
 
-
-        // GET: StockTransactions/Create
+        // GET: PortfolioStocks/Create
         public IActionResult Create()
         {
-            ViewData["StockID"] = new SelectList(_context.PortfolioStocks, "ID", "CompanyName");
             return View();
         }
 
-        // POST: StockTransactions/Create
+        // POST: PortfolioStocks/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StockID,TransactionDateTime,TransactionType,Price,Quantity")] PortfolioStockTransaction stockTransaction)
+        public async Task<IActionResult> Create([Bind("Symbol,CompanyName,AveragePrice,Volume,InitialPurchaseDateTime")] PortfolioStock portfolioStock)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _context.Add(stockTransaction);
+                    _context.Add(portfolioStock);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
@@ -76,12 +69,11 @@ namespace StockPortfolio.Controllers
             {
                 ModelState.AddModelError("", "Unable to save changes.");
             }
-            ViewData["StockID"] = new SelectList(_context.PortfolioStocks, "ID", "CompanyName", stockTransaction.PortfolioStockID);
-            return View(stockTransaction);
+            return View(portfolioStock);
         }
 
 
-        // GET: StockTransactions/Edit/5
+        // GET: PortfolioStocks/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -89,17 +81,15 @@ namespace StockPortfolio.Controllers
                 return NotFound();
             }
 
-            var stockTransaction = await _context.StockTransactions.FindAsync(id);
-            if (stockTransaction == null)
+            var portfolioStock = await _context.PortfolioStocks.FindAsync(id);
+            if (portfolioStock == null)
             {
                 return NotFound();
             }
-            ViewData["StockID"] = new SelectList(_context.Stocks, "ID", "CompanyName", stockTransaction.PortfolioStockID);
-            return View(stockTransaction);
+            return View(portfolioStock);
         }
 
-
-        // POST: StockTransactions/Edit/5
+        // POST: PortfolioStocks/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
@@ -110,10 +100,9 @@ namespace StockPortfolio.Controllers
             {
                 return NotFound();
             }
-            var stockTransactionToUpdate = await _context.StockTransactions
-                .FirstOrDefaultAsync(s => s.ID == id);
-            if (await TryUpdateModelAsync<PortfolioStockTransaction>(
-                stockTransactionToUpdate, "", s => s.PortfolioStockID, s => s.TransactionDateTime, s => s.TransactionType, s => s.Price, s => s.Quantity))
+            var portfolioStockToUpdate = await _context.PortfolioStocks
+                .FirstOrDefaultAsync(p => p.ID == id);
+            if (await TryUpdateModelAsync<PortfolioStock>(portfolioStockToUpdate, "", p => p.Symbol, p => p.CompanyName, p => p.AveragePrice, p => p.Volume, p => p.InitialPurchaseDateTime))
             {
                 try
                 {
@@ -125,22 +114,22 @@ namespace StockPortfolio.Controllers
                     ModelState.AddModelError("", "Unable to save changes.");
                 }
             }
-            return View(stockTransactionToUpdate);
+            return View(portfolioStockToUpdate);
         }
 
 
-        // GET: StockTransactions/Delete/5
+        // GET: PortfolioStocks/Delete/5
         public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
                 return NotFound();
             }
-            var stockTransaction = await _context.StockTransactions
+
+            var portfolioStock = await _context.PortfolioStocks
                 .AsNoTracking()
-                .Include(s => s.PortfolioStock)
-                .FirstOrDefaultAsync(s => s.ID == id);
-            if (stockTransaction == null)
+                .FirstOrDefaultAsync(m => m.ID == id);
+            if (portfolioStock == null)
             {
                 return NotFound();
             }
@@ -149,23 +138,22 @@ namespace StockPortfolio.Controllers
                 ViewData["ErrorMessage"] = "Delete failed.";
             }
 
-            return View(stockTransaction);
+            return View(portfolioStock);
         }
 
-
-        // POST: StockTransactions/Delete/5
+        // POST: PortfolioStocks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var stockTransaction = await _context.StockTransactions.FindAsync(id);
-            if (stockTransaction == null)
+            var portfolioStock = await _context.PortfolioStocks.FindAsync(id);
+            if (portfolioStock == null)
             {
                 return RedirectToAction(nameof(Index));
             }
             try
             {
-                _context.StockTransactions.Remove(stockTransaction);
+                _context.PortfolioStocks.Remove(portfolioStock);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -176,10 +164,9 @@ namespace StockPortfolio.Controllers
         }
 
 
-
-        private bool StockTransactionExists(int id)
+        private bool PortfolioStockExists(int id)
         {
-            return _context.StockTransactions.Any(e => e.ID == id);
+            return _context.PortfolioStocks.Any(e => e.ID == id);
         }
     }
 }
