@@ -76,10 +76,6 @@ namespace StockPortfolio.Controllers
                     if (stockTransaction.TransactionType == TransactionType.Buy)
                     {
                         // Set initial purchase price for portfolio stock
-                        if (portfolioStock.InitialPrice == 0)
-                        {
-                            portfolioStock.InitialPrice = stockTransaction.Price;
-                        }
                         portfolioStock.AveragePrice = (portfolioStock.StockCost + stockTransaction.TransactionValue) / (portfolioStock.Volume + stockTransaction.Quantity);
                         portfolioStock.Volume += stockTransaction.Quantity;
                         portfolioStock.StockCost = portfolioStock.AveragePrice * portfolioStock.Volume;

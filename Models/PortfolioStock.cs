@@ -29,9 +29,6 @@ namespace StockPortfolio.Models
 
         public Currency Currency { get; set; }
 
-        [Display(Name = "Initial Price")]
-        public double InitialPrice { get; set; }
-
         [Display(Name = "Average Price")]
         public double AveragePrice { get; set; }
 
@@ -50,7 +47,6 @@ namespace StockPortfolio.Models
             AveragePrice = 0;
             Volume = 0;
             StockCost = 0;
-            InitialPrice = 0;
             InitialPurchaseDateTime = DateTime.Now;
         }
 

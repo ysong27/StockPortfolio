@@ -23,9 +23,6 @@
                 @Html.DisplayNameFor(model => model.Currency)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.InitialPrice)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.AveragePrice)
             </th>
             <th>
@@ -60,9 +57,6 @@
                     @Html.DisplayFor(modelItem => item.Currency)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.InitialPrice)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.AveragePrice)
                 </td>
                 <td>
@@ -71,7 +65,6 @@
                 @*<td>
                         @Html.DisplayFor(modelItem => item.StockCost)
                     </td>*@
-
                 @foreach (var quote in quoteList)
                 {
                     if (quote.Symbol == item.Symbol)
