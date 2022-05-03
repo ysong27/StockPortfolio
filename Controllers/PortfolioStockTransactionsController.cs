@@ -12,7 +12,7 @@ namespace StockPortfolio.Controllers
 {
     public class PortfolioStockTransactionsController : Controller
     {
-        private readonly PortfolioContext _context;
+        private PortfolioContext _context;
 
         public PortfolioStockTransactionsController(PortfolioContext context)
         {
