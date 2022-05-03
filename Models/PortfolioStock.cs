@@ -37,8 +37,8 @@ namespace StockPortfolio.Models
 
         public int Volume { get; set; }
 
-        [Display(Name = "Value")]
-        public double StockValue { get; set; }
+        [Display(Name = "Cost")]
+        public double StockCost { get; set; }
 
         [Display(Name = "Initial Purchase Time")]
         public DateTime InitialPurchaseDateTime { get; set; }
@@ -49,7 +49,7 @@ namespace StockPortfolio.Models
         {
             AveragePrice = 0;
             Volume = 0;
-            StockValue = 0;
+            StockCost = 0;
             InitialPrice = 0;
             InitialPurchaseDateTime = DateTime.Now;
         }

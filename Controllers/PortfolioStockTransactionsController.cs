@@ -80,22 +80,22 @@ namespace StockPortfolio.Controllers
                         {
                             portfolioStock.InitialPrice = stockTransaction.Price;
                         }
-                        portfolioStock.AveragePrice = (portfolioStock.StockValue + stockTransaction.TransactionValue) / (portfolioStock.Volume + stockTransaction.Quantity);
+                        portfolioStock.AveragePrice = (portfolioStock.StockCost + stockTransaction.TransactionValue) / (portfolioStock.Volume + stockTransaction.Quantity);
                         portfolioStock.Volume += stockTransaction.Quantity;
-                        portfolioStock.StockValue = portfolioStock.AveragePrice * portfolioStock.Volume;
+                        portfolioStock.StockCost = portfolioStock.AveragePrice * portfolioStock.Volume;
                     }
                     else
                     {
                         if (portfolioStock.Volume >= stockTransaction.Quantity)
                         {
                             portfolioStock.Volume -= stockTransaction.Quantity;
-                            portfolioStock.StockValue -= stockTransaction.TransactionValue;
+                            portfolioStock.StockCost -= stockTransaction.TransactionValue;
                         } 
                         else if (portfolioStock.Volume == stockTransaction.Quantity)
                         {
                             portfolioStock.AveragePrice = 0;
                             portfolioStock.Volume = 0;
-                            portfolioStock.StockValue = 0;
+                            portfolioStock.StockCost = 0;
                         } 
                         else
                         {

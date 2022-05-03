@@ -22,7 +22,10 @@ namespace StockPortfolio.Controllers
         // GET: PortfolioStocks
         public async Task<IActionResult> Index()
         {
-            return View(await _context.PortfolioStocks.OrderBy(p => p.Symbol).ToListAsync());
+            var portfolioStocks = await _context.PortfolioStocks.OrderBy(m => m.Symbol).ToListAsync();
+            var symbolsStr = string.Join(",", portfolioStocks.Select(p => p.Symbol.ToString()));
+            ViewBag.quoteList = await YHFinanceAPIClient.ProcessQuotes(symbolsStr);
+            return View(portfolioStocks);
         }
 
         // GET: PortfolioStocks/Details/5

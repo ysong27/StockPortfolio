@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
+    var quoteList = ViewBag.quoteList;
 }
 
 <h1>Portfolio</h1>
@@ -22,9 +23,6 @@
                 @Html.DisplayNameFor(model => model.Currency)
             </th>
             <th>
-                Market Price
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.InitialPrice)
             </th>
             <th>
@@ -33,11 +31,17 @@
             <th>
                 @Html.DisplayNameFor(model => model.Volume)
             </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.StockCost)
+                </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.StockValue)
+                Market Price
             </th>
             <th>
-                Gain (%)
+                Total Return
+            </th>
+            <th>
+                Percentage Return
             </th>
             <th></th>
         </tr>
@@ -56,9 +60,6 @@
                     @Html.DisplayFor(modelItem => item.Currency)
                 </td>
                 <td>
-                    price
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.InitialPrice)
                 </td>
                 <td>
@@ -67,12 +68,24 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Volume)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StockValue)
-                </td>
-                <td>
-                    percentage
-                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.StockCost)
+                    </td>*@
+
+                @foreach (var quote in quoteList)
+                {
+                    if (quote.Symbol == item.Symbol)
+                    {
+                        var quotePrice = quote.Price;
+                        var stockValue = item.AveragePrice * item.Volume;
+                        var totalReturn = Math.Round((quotePrice * item.Volume) - stockValue, 2);
+                        var percentageReturn = Math.Round(totalReturn / stockValue * 100, 2);
+
+                        <td>@quotePrice</td>
+                        <td>@totalReturn</td>
+                        <td>@percentageReturn</td>
+                    }
+                }
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
@@ -85,10 +98,8 @@
 
 
 <style>
-    
+
     .container {
         max-width: 1300px;
     }
-
-
 </style>

@@ -27,17 +27,25 @@ namespace StockPortfolio.Data
 
         public static async Task<List<Quote>> ProcessQuotes(string symbols)
         {
+            var quoteList = new List<Quote>();
+            if (string.IsNullOrEmpty(symbols))
+            {
+                return quoteList;
+            }
             var url = $"{baseUrl}/v6/finance/quote?region=US&lang=en&symbols={symbols}";
             var stringTask = await client.GetStringAsync(url);
             var quoteResponse = JObject.Parse(stringTask);
             var quoteResult = quoteResponse["quoteResponse"]["result"].Children().AsEnumerable();
-            var quoteList = new List<Quote>();
             foreach (var quote in quoteResult)
             {
                 quoteList.Add(quote.ToObject<Quote>());
             }
             return quoteList;
         }
+
+
+
+
 
     }
 }
