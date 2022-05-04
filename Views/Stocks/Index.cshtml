@@ -5,7 +5,7 @@
     var quoteList = ViewBag.quoteList;
 }
 
-<h1>Index</h1>
+<h1>Stock Info</h1>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -16,8 +16,10 @@
             <th>@Html.DisplayNameFor(model => model.CompanyName)</th>
             <th>Currency</th>
             <th>Price</th>
+            <th>% Change (Day)</th>
             <th>50 Day Average Price</th>
             <th>Volume</th>
+            <th>Exchange</th>
             <th></th>
         </tr>
     </thead>
@@ -33,9 +35,11 @@
                     if (item.Symbol == quote.Symbol)
                     {
                         <td>@quote.Currency</td>
-                        <td>@quote.Price</td>
-                        <td>@quote.FiftyDayAveragePrice</td>
+                        <td>@Math.Round(quote.Price, 2)</td>
+                        <td>@Math.Round(quote.PercentageMarketChange, 2)</td>
+                        <td>@Math.Round(quote.FiftyDayAveragePrice, 2)</td>
                         <td>@quote.Volume</td>
+                        <td>@quote.ExchangeName</td>
                     }
                 }
                 <td>

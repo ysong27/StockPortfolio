@@ -38,7 +38,7 @@
                 Total Return
             </th>
             <th>
-                Percentage Return
+                % Return
             </th>
             <th></th>
         </tr>
@@ -72,7 +72,7 @@
                         var quotePrice = quote.Price;
                         var stockValue = item.AveragePrice * item.Volume;
                         var totalReturn = Math.Round((quotePrice * item.Volume) - stockValue, 2);
-                        var percentageReturn = Math.Round(totalReturn / stockValue * 100, 2);
+                        var percentageReturn = stockValue == 0 ? 0 : Math.Round(totalReturn / stockValue * 100, 2);
 
                         <td>@quotePrice</td>
                         <td>@totalReturn</td>

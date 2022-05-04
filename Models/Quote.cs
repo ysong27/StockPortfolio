@@ -20,10 +20,17 @@ namespace StockPortfolio.Models
         [JsonProperty("regularMarketPrice")]
         public double Price { get; set; }
 
+        [JsonProperty("regularMarketChangePercent")]
+        public double PercentageMarketChange { get; set; }
+
         [JsonProperty("fiftyDayAverage")]
         public double FiftyDayAveragePrice { get; set; }
 
         [JsonProperty("regularMarketVolume")]
         public int Volume { get; set; }
+
+        [JsonProperty("fullExchangeName")]
+        public string ExchangeName { get; set; }
+
     }
 }
