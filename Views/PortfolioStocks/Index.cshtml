@@ -40,6 +40,9 @@
             <th>
                 % Return
             </th>
+            <th>
+                Total Value
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -57,7 +60,7 @@
                     @Html.DisplayFor(modelItem => item.Currency)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.AveragePrice)
+                    @Math.Round(item.AveragePrice, 2)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Volume)
@@ -70,13 +73,15 @@
                     if (quote.Symbol == item.Symbol)
                     {
                         var quotePrice = quote.Price;
-                        var stockValue = item.AveragePrice * item.Volume;
-                        var totalReturn = Math.Round((quotePrice * item.Volume) - stockValue, 2);
-                        var percentageReturn = stockValue == 0 ? 0 : Math.Round(totalReturn / stockValue * 100, 2);
+                        var averageStockValue = item.AveragePrice * item.Volume;
+                        var totalValue = quotePrice * item.Volume;
+                        var totalReturn = totalValue - averageStockValue;
+                        var percentageReturn = averageStockValue == 0 ? 0 : (totalReturn / averageStockValue * 100);
 
-                        <td>@quotePrice</td>
-                        <td>@totalReturn</td>
-                        <td>@percentageReturn</td>
+                        <td>@Math.Round(quotePrice, 2)</td>
+                        <td>@Math.Round(totalReturn, 2)</td>
+                        <td>@Math.Round(percentageReturn, 2)</td>
+                        <td class="stockTotalValue">@Math.Round(totalValue, 2)</td>
                     }
                 }
                 <td>
@@ -96,3 +101,9 @@
         max-width: 1300px;
     }
 </style>
+
+<script>
+
+
+
+</script>
