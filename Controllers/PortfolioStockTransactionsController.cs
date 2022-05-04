@@ -52,7 +52,7 @@ namespace StockPortfolio.Controllers
         // GET: StockTransactions/Create
         public IActionResult Create()
         {
-            ViewData["StockID"] = new SelectList(_context.PortfolioStocks, "ID", "Symbol");
+            ViewData["StockID"] = new SelectList(_context.PortfolioStocks.OrderBy(p => p.Symbol), "ID", "Symbol");
             return View();
         }
 

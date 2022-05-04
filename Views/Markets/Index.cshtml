@@ -1,0 +1,46 @@
+﻿@model IEnumerable<StockPortfolio.Models.Market>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Markets</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Exchange</th>
+            <th>Type</th>
+            <th>Time Zone</th>
+            <th>Data Delay</th>
+            <th>Market Price</th>
+            <th>Market Change</th>
+            <th>% Market Change</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var market in Model)
+        {
+            <tr>
+                <td>@market.Name</td>
+                <td>@market.QuoteType</td>
+                <td>@market.TimeZone</td>
+                <td>@market.ExchangeDataDelay</td>
+                <td>@market.MarketPrice</td>
+                <td class="changeColored">@market.MarketChange</td>
+                <td class="changeColored">@market.PercentageMarketChange</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+
+            $(".changeColored:contains('-')").addClass('lossColored');
+            $(".changeColored:not(:contains('-'))").addClass('gainColored');
+
+        });
+    </script>
+}

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - StockPortfolio</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
     <header>
@@ -22,13 +22,16 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Stocks" asp-action="Index">Stock Info</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Stocks" asp-action="Index">Watchlist</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="PortfolioStocks" asp-action="Index">Portfolio Stocks</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="PortfolioStocks" asp-action="Index">Portfolio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="PortfolioStockTransactions" asp-action="Index">Portfolio Stock Transactions</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="PortfolioStockTransactions" asp-action="Index">Portfolio Transactions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Markets" asp-action="Index">Markets</a>
                         </li>
                     </ul>
                 </div>
@@ -53,3 +56,7 @@
 </body>
 </html>
 
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+
+} 

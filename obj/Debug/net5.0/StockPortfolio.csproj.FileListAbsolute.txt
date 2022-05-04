@@ -160,3 +160,4 @@ C:\Users\yoons\Desktop\Projects\StockPortfolio\obj\Debug\net5.0\Razor\Views\Port
 C:\Users\yoons\Desktop\Projects\StockPortfolio\obj\Debug\net5.0\Razor\Views\PortfolioStocks\Details.cshtml.g.cs
 C:\Users\yoons\Desktop\Projects\StockPortfolio\obj\Debug\net5.0\Razor\Views\PortfolioStocks\Edit.cshtml.g.cs
 C:\Users\yoons\Desktop\Projects\StockPortfolio\obj\Debug\net5.0\Razor\Views\PortfolioStocks\Index.cshtml.g.cs
+C:\Users\yoons\Desktop\Projects\StockPortfolio\obj\Debug\net5.0\Razor\Views\Markets\Index.cshtml.g.cs

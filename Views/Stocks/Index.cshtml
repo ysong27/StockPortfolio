@@ -5,7 +5,7 @@
     var quoteList = ViewBag.quoteList;
 }
 
-<h1>Stock Info</h1>
+<h1>Watchlist</h1>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -15,9 +15,9 @@
             <th>@Html.DisplayNameFor(model => model.Symbol)</th>
             <th>@Html.DisplayNameFor(model => model.CompanyName)</th>
             <th>Currency</th>
+            <th>50 Day Average Price</th>
             <th>Price</th>
             <th>% Change (Day)</th>
-            <th>50 Day Average Price</th>
             <th>Volume</th>
             <th>Exchange</th>
             <th></th>
@@ -35,9 +35,9 @@
                     if (item.Symbol == quote.Symbol)
                     {
                         <td>@quote.Currency</td>
-                        <td>@Math.Round(quote.Price, 2)</td>
-                        <td>@Math.Round(quote.PercentageMarketChange, 2)</td>
                         <td>@Math.Round(quote.FiftyDayAveragePrice, 2)</td>
+                        <td>@Math.Round(quote.Price, 2)</td>
+                        <td class="changeColored">@Math.Round(quote.PercentageMarketChange, 2)%</td>
                         <td>@quote.Volume</td>
                         <td>@quote.ExchangeName</td>
                     }
@@ -49,7 +49,27 @@
                 </td>
 
             </tr>
-
         }
     </tbody>
 </table>
+
+
+<style>
+
+    .container {
+        max-width: 1300px;
+    }
+</style>
+
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+
+            $(".changeColored:contains('-')").addClass('lossColored');
+            $(".changeColored:not(:contains('-'))").addClass('gainColored');
+
+        });
+    </script>
+}
